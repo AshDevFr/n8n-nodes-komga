@@ -1,0 +1,19 @@
+{
+	"node": "n8n-nodes-komga",
+	"nodeVersion": "1.0",
+	"codexVersion": "1.0",
+	"categories": ["Media", "Productivity"],
+	"resources": {
+		"credentialDocumentation": [
+			{
+				"url": "https://komga.org/docs/openapi/komga-api"
+			}
+		],
+		"primaryDocumentation": [
+			{
+				"url": "https://komga.org"
+			}
+		]
+	}
+}
+

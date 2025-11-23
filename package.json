@@ -1,24 +1,29 @@
 {
-	"name": "n8n-nodes-<...>",
-	"version": "0.1.0",
-	"description": "",
+	"name": "n8n-nodes-komga",
+	"version": "1.0.0",
+	"description": "Komga node for n8n",
 	"license": "MIT",
 	"homepage": "",
 	"keywords": [
-		"n8n-community-node-package"
+		"n8n-community-node-package",
+		"komga"
 	],
 	"author": {
-		"name": "",
-		"email": ""
+		"name": "Sylvain Cau",
+		"email": "ashdevfr@gmail.com"
 	},
 	"repository": {
 		"type": "git",
-		"url": "https://github.com/<...>/n8n-nodes-<...>.git"
+		"url": "https://github.com/AshDevFr/n8n-nodes-komga.git"
 	},
 	"scripts": {
 		"build": "n8n-node build",
 		"build:watch": "tsc --watch",
 		"dev": "n8n-node dev",
+		"docker:up": "docker compose up -d",
+		"docker:up:watch": "docker compose watch",
+		"docker:down": "docker compose down",
+		"docker:logs": "docker compose logs -f",
 		"lint": "n8n-node lint",
 		"lint:fix": "n8n-node lint --fix",
 		"release": "n8n-node release",
@@ -31,12 +36,10 @@
 		"n8nNodesApiVersion": 1,
 		"strict": true,
 		"credentials": [
-			"dist/credentials/GithubIssuesApi.credentials.js",
-			"dist/credentials/GithubIssuesOAuth2Api.credentials.js"
+			"dist/credentials/KomgaApi.credentials.js"
 		],
 		"nodes": [
-			"dist/nodes/GithubIssues/GithubIssues.node.js",
-			"dist/nodes/Example/Example.node.js"
+			"dist/nodes/Komga/Komga.node.js"
 		]
 	},
 	"devDependencies": {

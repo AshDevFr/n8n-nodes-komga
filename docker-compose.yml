@@ -1,0 +1,95 @@
+version: '3.8'
+
+services:
+  komga:
+    image: gotson/komga:latest
+    container_name: komga
+    ports:
+      - "25600:25600"
+    volumes:
+      - komga-data:/config
+      - ./data/komga/libraries:/libraries:ro
+    environment:
+      - KOMGA_LIBRARIES_SCAN_CRON=0 0 * * * *
+      - KOMGA_LIBRARIES_SCAN_STARTUP=false
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "wget", "--quiet", "--tries=1", "--spider", "http://localhost:25600/actuator/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+
+  n8n:
+    image: n8nio/n8n:latest
+    container_name: n8n
+    ports:
+      - "5678:5678"
+    volumes:
+      - n8n-data:/home/node/.n8n
+      - ./dist:/home/node/.n8n/custom/n8n-nodes-komga
+    environment:
+      - N8N_BASIC_AUTH_ACTIVE=true
+      - N8N_BASIC_AUTH_USER=admin
+      - N8N_BASIC_AUTH_PASSWORD=admin
+      - NODE_ENV=production
+      - WEBHOOK_URL=http://localhost:5678/
+      - GENERIC_TIMEZONE=UTC
+    restart: unless-stopped
+    depends_on:
+      komga:
+        condition: service_healthy
+      build:
+        condition: service_started
+    healthcheck:
+      test: ["CMD", "wget", "--quiet", "--tries=1", "--spider", "http://localhost:5678/healthz"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+    develop:
+      watch:
+        - action: restart
+          path: ./dist
+
+  build:
+    image: node:22-alpine
+    container_name: komga-node-builder
+    working_dir: /workspace
+    volumes:
+      - .:/workspace
+      - node_modules:/workspace/node_modules
+    command: >
+      sh -c "
+        echo 'Installing dependencies...' &&
+        npm install &&
+        echo 'Building initial version...' &&
+        npm run build &&
+        echo 'Starting watch mode...' &&
+        npm run build:watch
+      "
+    restart: unless-stopped
+    develop:
+      watch:
+        - action: sync
+          path: ./nodes
+          target: /workspace/nodes
+        - action: sync
+          path: ./credentials
+          target: /workspace/credentials
+        - action: sync
+          path: ./package.json
+          target: /workspace/package.json
+        - action: sync
+          path: ./tsconfig.json
+          target: /workspace/tsconfig.json
+        - action: restart
+          path: ./package.json
+        - action: restart
+          path: ./tsconfig.json
+
+volumes:
+  komga-data:
+  n8n-data:
+  node_modules:
+
