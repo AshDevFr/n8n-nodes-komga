@@ -4,12 +4,12 @@ import { seriesDescription } from './resources/series';
 import { bookDescription } from './resources/book';
 import { collectionDescription } from './resources/collection';
 import { readlistDescription } from './resources/readlist';
-import { traefikCompatibilityPreSend } from './shared/utils';
+import { normalizeRequestBodyPreSend } from './shared/utils';
 
 export class Komga implements INodeType {
 	hooks = {
 		httpRequest: {
-			preSend: [traefikCompatibilityPreSend],
+			preSend: [normalizeRequestBodyPreSend],
 		},
 	};
 

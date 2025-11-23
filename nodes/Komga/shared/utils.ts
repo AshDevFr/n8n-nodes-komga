@@ -16,19 +16,16 @@ export function parseLinkHeader(header?: string): { [rel: string]: string } {
 }
 
 /**
- * Global preSend hook for Traefik compatibility.
+ * Global preSend hook for reverse proxy/middleware compatibility.
  * Ensures empty POST/PATCH request bodies are sent as '{}' with proper Content-Type header.
- * Required when Komga is behind Traefik with contentTypeNosniff enabled.
+ * Required when Komga is behind reverse proxies (e.g., Traefik) with contentTypeNosniff enabled.
  */
-export async function traefikCompatibilityPreSend(
+export async function normalizeRequestBodyPreSend(
 	this: unknown,
 	requestOptions: IHttpRequestOptions,
 ): Promise<IHttpRequestOptions> {
 	// Only apply to POST and PATCH requests that might have empty bodies
-	if (
-		requestOptions.method !== 'POST' &&
-		requestOptions.method !== 'PATCH'
-	) {
+	if (requestOptions.method !== 'POST' && requestOptions.method !== 'PATCH') {
 		return requestOptions;
 	}
 
@@ -59,10 +56,8 @@ export async function traefikCompatibilityPreSend(
 		if (!requestOptions.headers) {
 			requestOptions.headers = {};
 		}
-		(requestOptions.headers as Record<string, string>)['Content-Type'] =
-			'application/json';
+		(requestOptions.headers as Record<string, string>)['Content-Type'] = 'application/json';
 	}
 
 	return requestOptions;
 }
-
