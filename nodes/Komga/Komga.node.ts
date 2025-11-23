@@ -4,15 +4,8 @@ import { seriesDescription } from './resources/series';
 import { bookDescription } from './resources/book';
 import { collectionDescription } from './resources/collection';
 import { readlistDescription } from './resources/readlist';
-import { normalizeRequestBodyPreSend } from './shared/utils';
 
 export class Komga implements INodeType {
-	hooks = {
-		httpRequest: {
-			preSend: [normalizeRequestBodyPreSend],
-		},
-	};
-
 	description: INodeTypeDescription = {
 		displayName: 'Komga',
 		name: 'komga',

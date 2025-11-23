@@ -98,4 +98,3 @@ export const collectionDescription: INodeProperties[] = [
 	...collectionUpdateDescription,
 	...collectionDeleteDescription,
 ];
-
