@@ -1,6 +1,6 @@
 {
 	"name": "n8n-nodes-komga",
-	"version": "1.0.4",
+	"version": "1.0.5",
 	"description": "Komga node for n8n",
 	"license": "MIT",
 	"homepage": "",
