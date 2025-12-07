@@ -13,7 +13,7 @@ The setup expects the following directory structure:
 
 ```
 .
-├── docker-compose.yml
+├── docker compose.yml
 ├── nodes/              # Source TypeScript files
 ├── credentials/        # Source credential files
 ├── dist/               # Built JavaScript files (auto-generated)
@@ -34,13 +34,7 @@ mkdir -p data/komga/libraries
 1. **Start all services with watch mode:**
 
    ```bash
-   docker-compose watch
-   ```
-
-   Or for detached mode:
-
-   ```bash
-   docker-compose up -d --watch
+   docker compose watch
    ```
 
 2. **Access the services:**
@@ -59,7 +53,7 @@ mkdir -p data/komga/libraries
 1. **Start the services:**
 
    ```bash
-   docker-compose watch
+   docker compose watch
    ```
 
 2. **Make changes** to your node code in `nodes/` or `credentials/`
@@ -103,35 +97,35 @@ mkdir -p data/komga/libraries
 
 ```bash
 # All services
-docker-compose logs -f
+docker compose logs -f
 
 # Specific service
-docker-compose logs -f build
-docker-compose logs -f n8n
-docker-compose logs -f komga
+docker compose logs -f build
+docker compose logs -f n8n
+docker compose logs -f komga
 ```
 
 ## Stopping Services
 
 ```bash
 # Stop all services
-docker-compose down
+docker compose down
 
 # Stop and remove volumes (⚠️ deletes all data)
-docker-compose down -v
+docker compose down -v
 ```
 
 ## Customizing Environment
 
 To customize n8n settings (e.g., disable auth, enable debug logging), you can:
 
-1. **Edit `docker-compose.yml` directly** - Modify the `n8n` service environment variables
-2. **Use a `.env` file** - Create a `.env` file and reference variables in `docker-compose.yml`
+1. **Edit `docker compose.yml` directly** - Modify the `n8n` service environment variables
+2. **Use a `.env` file** - Create a `.env` file and reference variables in `docker compose.yml`
 
 Example to disable auth and enable debug logging:
 
 ```yaml
-# In docker-compose.yml, modify n8n service environment:
+# In docker compose.yml, modify n8n service environment:
 environment:
   - N8N_BASIC_AUTH_ACTIVE=false
   - NODE_ENV=development
@@ -142,21 +136,21 @@ environment:
 
 ### Node doesn't appear in n8n
 
-1. Check that the build completed successfully: `docker-compose logs build`
-2. Verify the dist folder is mounted: `docker-compose exec n8n ls -la /home/node/.n8n/custom/`
-3. Restart n8n: `docker-compose restart n8n`
+1. Check that the build completed successfully: `docker compose logs build`
+2. Verify the dist folder is mounted: `docker compose exec n8n ls -la /home/node/.n8n/custom/`
+3. Restart n8n: `docker compose restart n8n`
 
 ### Build errors
 
-1. Check the build service logs: `docker-compose logs build`
-2. Ensure dependencies are installed: `docker-compose exec build npm install`
+1. Check the build service logs: `docker compose logs build`
+2. Ensure dependencies are installed: `docker compose exec build npm install`
 
 ### Watch not working
 
-1. Ensure you're using Docker Compose v2.22+ (check with `docker-compose version`)
-2. Make sure you're running with `docker-compose watch` or `docker-compose up --watch`
-3. Check that file changes are being detected: `docker-compose logs build`
-4. Verify the watch configuration is correct: `docker-compose config`
+1. Ensure you're using Docker Compose v2.22+ (check with `docker compose version`)
+2. Make sure you're running with `docker compose watch`
+3. Check that file changes are being detected: `docker compose logs build`
+4. Verify the watch configuration is correct: `docker compose config`
 
 ### n8n restarts too frequently
 
@@ -164,12 +158,12 @@ If n8n restarts on every source file change (instead of only when `dist/` change
 
 - Check that n8n's watch is configured to only watch `./dist`
 - Verify the build service is outputting to `dist/` correctly
-- Check logs: `docker-compose logs n8n` to see what's triggering restarts
+- Check logs: `docker compose logs n8n` to see what's triggering restarts
 
 ### Komga not accessible
 
-1. Check health status: `docker-compose ps`
-2. View logs: `docker-compose logs komga`
+1. Check health status: `docker compose ps`
+2. View logs: `docker compose logs komga`
 3. Ensure port 25600 is not in use
 
 ## Mounting Your Comics Library
@@ -186,7 +180,7 @@ The Komga libraries directory is configured at `./data/komga/libraries` (read-on
 
 3. **Access Komga UI** at http://localhost:25600 and configure the library in the web UI
 
-**Alternative:** To use a different location, modify the volume mount in `docker-compose.yml`:
+**Alternative:** To use a different location, modify the volume mount in `docker compose.yml`:
 
 ```yaml
 # In komga service volumes, replace:
@@ -200,7 +194,7 @@ The Komga libraries directory is configured at `./data/komga/libraries` (read-on
 If you need to manually trigger a rebuild:
 
 ```bash
-docker-compose exec build npm run build
+docker compose exec build npm run build
 ```
 
 ## Using npm scripts

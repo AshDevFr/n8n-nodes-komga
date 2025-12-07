@@ -75,7 +75,7 @@ export const bookDescription: INodeProperties[] = [
 				routing: {
 					request: {
 						method: 'GET',
-						url: '/api/v1/books/{{$parameter.bookId}}',
+						url: '=/api/v1/books/{{$parameter.bookId}}',
 					},
 				},
 			},

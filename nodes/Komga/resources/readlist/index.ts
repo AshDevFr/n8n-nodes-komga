@@ -40,7 +40,7 @@ export const readlistDescription: INodeProperties[] = [
 				routing: {
 					request: {
 						method: 'DELETE',
-						url: '/api/v1/readlists/{{$parameter.readlistId}}',
+						url: '=/api/v1/readlists/{{$parameter.readlistId}}',
 					},
 				},
 			},
@@ -52,7 +52,7 @@ export const readlistDescription: INodeProperties[] = [
 				routing: {
 					request: {
 						method: 'GET',
-						url: '/api/v1/readlists/{{$parameter.readlistId}}',
+						url: '=/api/v1/readlists/{{$parameter.readlistId}}',
 					},
 				},
 			},
@@ -76,7 +76,7 @@ export const readlistDescription: INodeProperties[] = [
 				routing: {
 					request: {
 						method: 'PATCH',
-						url: '/api/v1/readlists/{{$parameter.readlistId}}',
+						url: '=/api/v1/readlists/{{$parameter.readlistId}}',
 					},
 				},
 			},

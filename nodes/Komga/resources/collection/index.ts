@@ -40,7 +40,7 @@ export const collectionDescription: INodeProperties[] = [
 				routing: {
 					request: {
 						method: 'DELETE',
-						url: '/api/v1/collections/{{$parameter.collectionId}}',
+						url: '=/api/v1/collections/{{$parameter.collectionId}}',
 					},
 				},
 			},
@@ -52,7 +52,7 @@ export const collectionDescription: INodeProperties[] = [
 				routing: {
 					request: {
 						method: 'GET',
-						url: '/api/v1/collections/{{$parameter.collectionId}}',
+						url: '=/api/v1/collections/{{$parameter.collectionId}}',
 					},
 				},
 			},
@@ -76,7 +76,7 @@ export const collectionDescription: INodeProperties[] = [
 				routing: {
 					request: {
 						method: 'PATCH',
-						url: '/api/v1/collections/{{$parameter.collectionId}}',
+						url: '=/api/v1/collections/{{$parameter.collectionId}}',
 					},
 				},
 			},

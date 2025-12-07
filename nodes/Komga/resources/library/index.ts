@@ -40,7 +40,7 @@ export const libraryDescription: INodeProperties[] = [
 				routing: {
 					request: {
 						method: 'DELETE',
-						url: '/api/v1/libraries/{{$parameter.libraryId}}',
+						url: '=/api/v1/libraries/{{$parameter.libraryId}}',
 					},
 				},
 			},
@@ -52,7 +52,7 @@ export const libraryDescription: INodeProperties[] = [
 				routing: {
 					request: {
 						method: 'GET',
-						url: '/api/v1/libraries/{{$parameter.libraryId}}',
+						url: '=/api/v1/libraries/{{$parameter.libraryId}}',
 					},
 				},
 			},
@@ -76,7 +76,7 @@ export const libraryDescription: INodeProperties[] = [
 				routing: {
 					request: {
 						method: 'PATCH',
-						url: '/api/v1/libraries/{{$parameter.libraryId}}',
+						url: '=/api/v1/libraries/{{$parameter.libraryId}}',
 					},
 				},
 			},

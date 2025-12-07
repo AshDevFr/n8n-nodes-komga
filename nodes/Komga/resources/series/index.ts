@@ -75,7 +75,7 @@ export const seriesDescription: INodeProperties[] = [
 				routing: {
 					request: {
 						method: 'GET',
-						url: '/api/v1/series/{{$parameter.seriesId}}',
+						url: '=/api/v1/series/{{$parameter.seriesId}}',
 					},
 				},
 			},
