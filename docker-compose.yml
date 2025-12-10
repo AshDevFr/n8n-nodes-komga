@@ -69,22 +69,29 @@ services:
     restart: unless-stopped
     develop:
       watch:
-        - action: sync
+        - action: sync+restart
           path: ./nodes
           target: /workspace/nodes
-        - action: sync
+        - action: sync+restart
           path: ./credentials
           target: /workspace/credentials
-        - action: sync
+        - action: sync+restart
           path: ./package.json
           target: /workspace/package.json
-        - action: sync
+        - action: sync+restart
           path: ./tsconfig.json
           target: /workspace/tsconfig.json
-        - action: restart
-          path: ./package.json
-        - action: restart
-          path: ./tsconfig.json
+
+  debug-server:
+    image: node:22-alpine
+    container_name: komga-debug-server
+    working_dir: /app
+    volumes:
+      - ./debug-server.js:/app/debug-server.js
+    command: node debug-server.js
+    ports:
+      - "3000:3000"
+    restart: unless-stopped
 
 volumes:
   komga-data:

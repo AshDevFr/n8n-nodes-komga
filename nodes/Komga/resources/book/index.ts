@@ -36,19 +36,22 @@ export const bookDescription: INodeProperties[] = [
 									requestOptions.body = {};
 								}
 
+								// Type assertion: after initialization, body is a Record
+								const body = requestOptions.body as Record<string, unknown>;
+
 								// Remove empty condition object if it exists
 								// Komga can't deserialize empty condition objects
 								if (
-									requestOptions.body.condition &&
-									typeof requestOptions.body.condition === 'object' &&
-									Object.keys(requestOptions.body.condition).length === 0
+									body.condition &&
+									typeof body.condition === 'object' &&
+									Object.keys(body.condition).length === 0
 								) {
-									delete requestOptions.body.condition;
+									delete body.condition;
 								}
 
 								// Workaround: n8n strips empty bodies, so we need to stringify it manually
 								// when the body is empty to ensure it's sent as '{}'
-								if (Object.keys(requestOptions.body).length === 0) {
+								if (Object.keys(body).length === 0) {
 									// Convert to string to prevent n8n from stripping it
 									requestOptions.body = '{}' as unknown as Record<string, unknown>;
 									// Make sure we don't double-encode

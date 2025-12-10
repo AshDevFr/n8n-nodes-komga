@@ -7,18 +7,18 @@ import {
 	buildEnumCondition,
 } from '../../shared/utils';
 
-const showOnlyForSeriesList = {
-	operation: ['list'],
+const showOnlyForSeriesAlphabeticalGroups = {
+	operation: ['alphabeticalGroups'],
 	resource: ['series'],
 };
 
-export const seriesListDescription: INodeProperties[] = [
+export const seriesAlphabeticalGroupsDescription: INodeProperties[] = [
 	{
 		displayName: 'Condition Operator',
 		name: 'conditionOperator',
 		type: 'options',
 		displayOptions: {
-			show: showOnlyForSeriesList,
+			show: showOnlyForSeriesAlphabeticalGroups,
 		},
 		options: [
 			{
@@ -37,83 +37,6 @@ export const seriesListDescription: INodeProperties[] = [
 		hint: 'Use "All Of" when you want results matching ALL filters, or "Any Of" when results can match ANY filter',
 	},
 	{
-		displayName: 'Limit',
-		name: 'limit',
-		type: 'number',
-		displayOptions: {
-			show: {
-				...showOnlyForSeriesList,
-				returnAll: [false],
-			},
-		},
-		typeOptions: {
-			minValue: 1,
-			maxValue: 1000,
-		},
-		default: 50,
-		routing: {
-			send: {
-				type: 'query',
-				property: 'size',
-			},
-			output: {
-				maxResults: '={{$value}}',
-			},
-		},
-		description: 'Max number of results to return',
-	},
-	{
-		displayName: 'Return All',
-		name: 'returnAll',
-		type: 'boolean',
-		displayOptions: {
-			show: showOnlyForSeriesList,
-		},
-		default: false,
-		description: 'Whether to return all results or only up to a given limit',
-		routing: {
-			send: {
-				paginate: '={{ $value }}',
-				type: 'query',
-				property: 'size',
-				value: '={{ $value ? "1000" : $limit?.value }}',
-			},
-		},
-	},
-	{
-		displayName: 'Sort',
-		name: 'sort',
-		type: 'string',
-		displayOptions: {
-			show: showOnlyForSeriesList,
-		},
-		default: '',
-		description:
-			'Sorting criteria in the format: property(,asc|desc). Default sort order is ascending. Multiple sort criteria are supported (comma-separated).',
-		routing: {
-			send: {
-				type: 'query',
-				property: 'sort',
-			},
-		},
-	},
-	{
-		displayName: 'Unpaged',
-		name: 'unpaged',
-		type: 'boolean',
-		displayOptions: {
-			show: showOnlyForSeriesList,
-		},
-		default: false,
-		description: 'Whether to return all results without pagination',
-		routing: {
-			send: {
-				type: 'query',
-				property: 'unpaged',
-			},
-		},
-	},
-	{
 		displayName: 'Filters',
 		name: 'filters',
 		type: 'collection',
@@ -121,7 +44,7 @@ export const seriesListDescription: INodeProperties[] = [
 			multipleValueButtonText: 'Add Filter',
 		},
 		displayOptions: {
-			show: showOnlyForSeriesList,
+			show: showOnlyForSeriesAlphabeticalGroups,
 		},
 		default: {},
 		options: [

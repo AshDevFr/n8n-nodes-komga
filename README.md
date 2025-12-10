@@ -43,8 +43,26 @@ The Komga node supports the following resources and operations:
 
 ### Series
 
+- **Analyze** - Trigger analysis for a series (requires ADMIN role)
 - **Get** - Get the data of a single series by ID
+- **Get Collections** - List all collections for a series
+- **Get Thumbnail** - Get the poster image for a series
 - **List** - List series (with filtering options)
+- **List Alphabetical Groups** - List series grouped by first character
+- **List Latest** - List recently added or updated series
+- **List New** - List newly added series
+- **List Release Dates** - List release dates for series
+- **List Thumbnails** - List all poster images for a series
+- **List Updated** - List recently updated series (not newly added)
+- **Mark as Read** - Mark all books in series as read
+- **Mark as Unread** - Mark all books in series as unread
+- **Delete File** - Delete all book files for a series (requires ADMIN role)
+- **Delete Thumbnail** - Delete a specific thumbnail for a series (requires ADMIN role)
+- **Get Thumbnail by ID** - Get a specific thumbnail image by ID
+- **Refresh Metadata** - Trigger metadata refresh for a series (requires ADMIN role)
+- **Select Thumbnail** - Mark a thumbnail as selected for a series (requires ADMIN role)
+- **Update Metadata** - Update metadata for a series (requires ADMIN role)
+- **Upload Thumbnail** - Upload a new poster image for a series (requires ADMIN role)
 
 ### Book
 
@@ -135,7 +153,38 @@ This node has been tested with:
 
 ## Version History
 
-### 1.0.00
+### 1.1.0
+
+- Added extensive Series operations:
+  - Analyze series
+  - Get Collections for a series
+  - Get/List/Upload/Delete/Select Thumbnails
+  - List Latest, New, Updated series
+  - List Alphabetical Groups
+  - List Release Dates
+  - Mark as Read/Unread
+  - Delete series files
+  - Refresh and Update Metadata
+
+### 1.0.6
+
+- Fix URL issues
+
+### 1.0.5
+
+- Remove Publish Workflow
+
+### 1.0.4
+
+- Fix a PreSend issue
+
+### 1.0.2
+
+- Initial commit
+- Komga API node
+- Update PreSend method name to make it easier to understand the issue
+
+### 1.0.0
 
 - Initial release
 - Support for Library, Series, Book, Collection, and Readlist resources
