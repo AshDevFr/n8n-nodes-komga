@@ -80,14 +80,29 @@ export const seriesDescription: INodeProperties[] = [
 					request: {
 						method: 'GET',
 						url: '=/api/v1/series/{{$parameter.seriesId}}/thumbnail',
+						headers: {
+							Accept: 'image/jpeg',
+						},
+						encoding: 'arraybuffer',
+						returnFullResponse: true,
 					},
 					output: {
 						postReceive: [
-							{
-								type: 'binaryData',
-								properties: {
-									destinationProperty: 'data',
-								},
+							async function (_items, response) {
+								const binaryData = await this.helpers.prepareBinaryData(
+									response?.body as Buffer,
+									'thumbnail.jpg',
+									'image/jpeg',
+								);
+
+								return [
+									{
+										json: {},
+										binary: {
+											data: binaryData,
+										},
+									},
+								];
 							},
 						],
 					},
@@ -314,14 +329,29 @@ export const seriesDescription: INodeProperties[] = [
 					request: {
 						method: 'GET',
 						url: '=/api/v1/series/{{$parameter.seriesId}}/thumbnails/{{$parameter.thumbnailId}}',
+						headers: {
+							Accept: 'image/jpeg',
+						},
+						encoding: 'arraybuffer',
+						returnFullResponse: true,
 					},
 					output: {
 						postReceive: [
-							{
-								type: 'binaryData',
-								properties: {
-									destinationProperty: 'data',
-								},
+							async function (_items, response) {
+								const binaryData = await this.helpers.prepareBinaryData(
+									response?.body as Buffer,
+									'thumbnail.jpg',
+									'image/jpeg',
+								);
+
+								return [
+									{
+										json: {},
+										binary: {
+											data: binaryData,
+										},
+									},
+								];
 							},
 						],
 					},
